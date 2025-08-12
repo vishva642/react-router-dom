@@ -39,20 +39,10 @@ const About = () => {
       return product.p_name.toLowerCase().includes(search.toLowerCase())
     })
     .filter((product) => {
-      if (category) {
-        return product.category === category
-      }
-      else {
-        return product
-      }
+      return product.p_price=== price
     })
-    .sort((a, b) => {
-      if (price === "ltoh") {
-        return a.p_price - b.p_price
-      }
-      else {
-        return b.p_price - a.p_price
-      }
+    .filter((product) => {
+        return product.category==category
     })
   console.log(filterProduct)
   return (
@@ -60,10 +50,10 @@ const About = () => {
       <div className="container mt-3">
         <div className="row">
           <div className="col-lg-4">
-            <input type="text" onChange={(e) => setSearch(e.target.value)} className="form-control" placeholder="Enter product name" />
+            <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} className="form-control" placeholder="Enter product name" />
           </div>
           <div className="col-lg-4">
-            <input type="text" onChange={(e) => setPrice(e.target.value)} className="form-control" placeholder="Enter product price" />
+            <input type="number" onChange={(e) => setPrice(e.target.value)} value={price} className="form-control" placeholder="Enter product price" />
           </div>
           <div className="col-lg-4">
             <select onChange={(e) => setCategory(e.target.value)} className="form-select">
@@ -71,7 +61,7 @@ const About = () => {
               {
                 [...uniqueCategory].map((cat, i) => {
                   return (
-                    <option key={i}>{cat}</option>
+                    <option key={i} value={cat}>{cat}</option>
                   )
                 })
               }
